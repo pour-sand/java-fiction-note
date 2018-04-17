@@ -1,23 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f8a7f6fe-8b58-47ad-b6e7-7f02f1fb4333" name="Default" comment="">
+    <list default="true" id="f8a7f6fe-8b58-47ad-b6e7-7f02f1fb4333" name="Default" comment="record time format change">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/log/TestWeb.log.2018-02-25.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/log/TestWeb.log.2018-02-26.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/log/TestWeb.log.2018-03-01.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/log/TestWeb.log.2018-03-02.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/log/TestWeb.log.2018-03-03.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/log/TestWeb.log.2018-03-04.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/log/TestWeb.log.2018-03-05.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/log/TestWeb.log.2018-03-06.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/log/TestWeb.log.2018-03-07.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/log/TestWeb.log.2018-03-13.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/log/TestWeb.log.2018-03-26.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/log/TestWeb.log.2018-03-27.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/log/TestWeb.log.2018-03-31.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/log/TestWeb.log.2018-04-01.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/log/TestWeb.log.2018-04-17.log" beforeDir="false" afterPath="$PROJECT_DIR$/log/TestWeb.log.2018-04-17.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/fictionNote/controller/RecordTimeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fictionNote/controller/RecordTimeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/fictionNote/utils/DateUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fictionNote/utils/DateUtils.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -28,7 +15,34 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="RecordTimeController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/fictionNote/controller/RecordTimeController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="81">
+              <caret line="21" column="12" selection-start-line="21" selection-start-column="12" selection-end-line="21" selection-end-column="12" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#2089#2095#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DateUtils.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/fictionNote/utils/DateUtils.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="161">
+              <caret line="46" column="39" lean-forward="true" selection-start-line="46" selection-start-column="39" selection-end-line="46" selection-end-column="39" />
+              <folding>
+                <element signature="e#1144#1145#0" expanded="true" />
+                <element signature="e#1196#1197#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -64,8 +78,9 @@
         <option value="$PROJECT_DIR$/src/main/java/com/fictionNote/model/Result.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/fictionNote/model/Note.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/fictionNote/repository/TimeRepository.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/fictionNote/controller/RecordTimeController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/fictionNote/model/Time.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/fictionNote/controller/RecordTimeController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/fictionNote/utils/DateUtils.java" />
       </list>
     </option>
   </component>
@@ -93,12 +108,46 @@
             <path>
               <item name="fictionNote" type="b2602c69:ProjectViewProjectNode" />
               <item name="fiction-note" type="462c0819:PsiDirectoryNode" />
-              <item name="log" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="fictionNote" type="b2602c69:ProjectViewProjectNode" />
               <item name="fiction-note" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="fictionNote" type="b2602c69:ProjectViewProjectNode" />
+              <item name="fiction-note" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="fictionNote" type="b2602c69:ProjectViewProjectNode" />
+              <item name="fiction-note" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="fictionNote" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="fictionNote" type="b2602c69:ProjectViewProjectNode" />
+              <item name="fiction-note" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="fictionNote" type="462c0819:PsiDirectoryNode" />
+              <item name="controller" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="fictionNote" type="b2602c69:ProjectViewProjectNode" />
+              <item name="fiction-note" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="fictionNote" type="462c0819:PsiDirectoryNode" />
+              <item name="utils" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -221,25 +270,34 @@
       <option name="presentableId" value="Default" />
       <updated>1523925165924</updated>
     </task>
+    <task id="LOCAL-00001" summary="test delete logs">
+      <created>1523978249247</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1523978249247</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="54" y="-8" width="1320" height="784" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Messages" order="7" sideWeight="0.49923313" weight="0.32937685" />
+      <window_info active="true" anchor="bottom" id="Messages" order="7" sideWeight="0.49846625" visible="true" weight="0.32937685" />
       <window_info anchor="right" id="Palette&#9;" order="3" />
       <window_info id="Image Layers" order="2" />
       <window_info anchor="right" id="Capture Analysis" order="3" />
-      <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.5007669" side_tool="true" visible="true" weight="0.32937685" />
+      <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.50153375" side_tool="true" visible="true" weight="0.32937685" />
       <window_info anchor="right" id="Maven Projects" order="3" />
       <window_info anchor="bottom" id="Version Control" order="7" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49923313" visible="true" weight="0.32937685" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49923313" weight="0.32937685" />
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="2" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.4102761" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.4102761" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32937685" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -256,6 +314,11 @@
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="test delete logs" />
+    <MESSAGE value="record time format change" />
+    <option name="LAST_COMMIT_MESSAGE" value="record time format change" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -442,17 +505,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/fictionNote/controller/RecordTimeController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="63" column="25" lean-forward="true" selection-start-line="63" selection-start-column="25" selection-end-line="63" selection-end-column="25" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#2089#2095#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/fictionNote/model/Note.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="285">
@@ -474,6 +526,28 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="95">
           <caret line="5" column="10" lean-forward="true" selection-start-line="5" selection-start-column="10" selection-end-line="5" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/fictionNote/controller/RecordTimeController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="81">
+          <caret line="21" column="12" selection-start-line="21" selection-start-column="12" selection-end-line="21" selection-end-column="12" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#2089#2095#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/fictionNote/utils/DateUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="161">
+          <caret line="46" column="39" lean-forward="true" selection-start-line="46" selection-start-column="39" selection-end-line="46" selection-end-column="39" />
+          <folding>
+            <element signature="e#1144#1145#0" expanded="true" />
+            <element signature="e#1196#1197#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

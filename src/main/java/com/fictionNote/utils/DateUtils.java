@@ -16,6 +16,7 @@ public class DateUtils {
 	private static final long ONE_DAY = 24*60*60*1000L;
     public static final String patternA = "yyyy-MM-dd";  
     public static final String patternB = "yyyy-MM-dd HH:mm";
+	public static final String patternC = "yyyy-MM-dd HH:mm:ss";
     private static final String[] sevenDays = new String[] {"Sun","Mon","Tue","Wed","Thu","Fri","Sat"};
     private static final Logger logger = LoggerFactory.getLogger(DateUtils.class);
     public static Integer dayToInteger(String s) {
@@ -28,6 +29,9 @@ public class DateUtils {
 		else if(s.equals("Sun")) return 7;
 		else return -1;
 	}
+	public static String formateRecordTime(String time){
+    	return time.replace("T", " ").split(".")[0];
+	}
     public static String formateNoteTime(Date date){
     	return dateToString(date, patternB);
     }
@@ -38,7 +42,7 @@ public class DateUtils {
     	Date d1 = stringToDate(formateNoteTime(t1), patternB);
     	System.out.println("time---"+d1);
     	Date d2 = stringToDate(formateNoteTime(t2), patternB);
-    	return d1.before(d2) || d1.equals(d1);
+    	return d1.before(d2) || d1.equals(d2);
     }
     public static String formateDate(Date date){  
         return dateToString(date, patternA);

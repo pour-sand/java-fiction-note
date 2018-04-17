@@ -17,14 +17,16 @@ import java.util.List;
 @Controller
 public class RecordTimeController {
     @Autowired
-    TimeRepository timeRepository;
+    private TimeRepository timeRepository;
     @Autowired
-    UserRepository userRepository;
+    private UserRepository userRepository;
 
     @RequestMapping(value = "/addRecordTime", method = { RequestMethod.POST})
     @ResponseBody
     public String addNote(@RequestBody Time time) {
         System.out.println(time);
+        time.setBegin(DateUtils.formateRecordTime(time.getBegin()));
+        time.setEnd(DateUtils.formateRecordTime(time.getEnd()));
         /*time.setBegin(DateUtils.formateNoteTime(new Date()));
         if(!DateUtils.compareNoteTime(time.getBookId(), time.getEnd()))
                 || !DateUtils.compareNoteTime(time.getTimee(), time.getTime())){
