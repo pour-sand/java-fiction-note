@@ -1,0 +1,176 @@
+2018-03-04 21:42:24.929 [main] INFO  com.fictionNote.Application -
+				Starting Application on as with PID 17872 (started by asus in D:\Program Files\eclipse\workplace\fiction-note)
+2018-03-04 21:42:24.947 [main] INFO  com.fictionNote.Application -
+				The following profiles are active: dev
+2018-03-04 21:42:27.353 [background-preinit] INFO  org.hibernate.validator.internal.util.Version -
+				HV000001: Hibernate Validator 5.3.5.Final
+2018-03-04 21:42:32.323 [main] INFO  o.s.b.c.e.AnnotationConfigEmbeddedWebApplicationContext -
+				Refreshing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@6d763516: startup date [Sun Mar 04 21:42:32 CST 2018]; root of context hierarchy
+2018-03-04 21:42:45.375 [main] INFO  o.s.b.c.e.tomcat.TomcatEmbeddedServletContainer -
+				Tomcat initialized with port(s): 8090 (http)
+2018-03-04 21:42:45.420 [main] INFO  org.apache.catalina.core.StandardService -
+				Starting service [Tomcat]
+2018-03-04 21:42:45.421 [main] INFO  org.apache.catalina.core.StandardEngine -
+				Starting Servlet Engine: Apache Tomcat/8.5.23
+2018-03-04 21:42:47.165 [localhost-startStop-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] -
+				Initializing Spring embedded WebApplicationContext
+2018-03-04 21:42:47.165 [localhost-startStop-1] INFO  org.springframework.web.context.ContextLoader -
+				Root WebApplicationContext: initialization completed in 14842 ms
+2018-03-04 21:42:47.420 [localhost-startStop-1] INFO  o.s.boot.web.servlet.ServletRegistrationBean -
+				Mapping servlet: 'dispatcherServlet' to [/]
+2018-03-04 21:42:47.423 [localhost-startStop-1] INFO  o.s.boot.web.servlet.FilterRegistrationBean -
+				Mapping filter: 'characterEncodingFilter' to: [/*]
+2018-03-04 21:42:47.424 [localhost-startStop-1] INFO  o.s.boot.web.servlet.FilterRegistrationBean -
+				Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+2018-03-04 21:42:47.424 [localhost-startStop-1] INFO  o.s.boot.web.servlet.FilterRegistrationBean -
+				Mapping filter: 'httpPutFormContentFilter' to: [/*]
+2018-03-04 21:42:47.424 [localhost-startStop-1] INFO  o.s.boot.web.servlet.FilterRegistrationBean -
+				Mapping filter: 'requestContextFilter' to: [/*]
+2018-03-04 21:42:52.766 [main] INFO  org.mongodb.driver.cluster -
+				Cluster created with settings {hosts=[localhost:27017], mode=SINGLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500}
+2018-03-04 21:42:55.151 [cluster-ClusterId{value='5a9bf7dc90aa7d45d0d09964', description='null'}-localhost:27017] INFO  org.mongodb.driver.connection -
+				Opened connection [connectionId{localValue:1, serverValue:13}] to localhost:27017
+2018-03-04 21:42:55.152 [cluster-ClusterId{value='5a9bf7dc90aa7d45d0d09964', description='null'}-localhost:27017] INFO  org.mongodb.driver.cluster -
+				Monitor thread successfully connected to server with description ServerDescription{address=localhost:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[3, 6, 2]}, minWireVersion=0, maxWireVersion=6, maxDocumentSize=16777216, roundTripTimeNanos=577331}
+2018-03-04 21:42:59.120 [main] INFO  o.s.w.s.m.m.a.RequestMappingHandlerAdapter -
+				Looking for @ControllerAdvice: org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@6d763516: startup date [Sun Mar 04 21:42:32 CST 2018]; root of context hierarchy
+2018-03-04 21:42:59.233 [main] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping -
+				Mapped "{[/addNote],methods=[POST]}" onto public java.lang.String com.fictionNote.controller.NoteController.addNote(javax.servlet.http.HttpServletRequest)
+2018-03-04 21:42:59.235 [main] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping -
+				Mapped "{[/test],methods=[GET]}" onto public com.fictionNote.model.Result<com.fictionNote.model.User> com.fictionNote.controller.UserController.test()
+2018-03-04 21:42:59.236 [main] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping -
+				Mapped "{[/loginUser],methods=[POST]}" onto public com.fictionNote.model.Result<com.fictionNote.model.User> com.fictionNote.controller.UserController.loginUser(javax.servlet.http.HttpServletRequest)
+2018-03-04 21:42:59.238 [main] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping -
+				Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+2018-03-04 21:42:59.239 [main] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping -
+				Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2018-03-04 21:42:59.286 [main] INFO  o.s.web.servlet.handler.SimpleUrlHandlerMapping -
+				Mapped URL path [/wahaha/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-03-04 21:42:59.286 [main] INFO  o.s.web.servlet.handler.SimpleUrlHandlerMapping -
+				Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-03-04 21:42:59.286 [main] INFO  o.s.web.servlet.handler.SimpleUrlHandlerMapping -
+				Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-03-04 21:42:59.394 [main] INFO  o.s.web.servlet.handler.SimpleUrlHandlerMapping -
+				Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-03-04 21:42:59.428 [main] WARN  o.s.b.a.t.AbstractTemplateResolverConfiguration -
+				Cannot find template location: classpath:/templates/ (please add some templates or check your Thymeleaf configuration)
+2018-03-04 21:43:03.756 [main] INFO  o.s.jmx.export.annotation.AnnotationMBeanExporter -
+				Registering beans for JMX exposure on startup
+2018-03-04 21:43:03.974 [main] INFO  org.apache.coyote.http11.Http11NioProtocol -
+				Initializing ProtocolHandler ["http-nio-8090"]
+2018-03-04 21:43:04.153 [main] INFO  org.apache.coyote.http11.Http11NioProtocol -
+				Starting ProtocolHandler ["http-nio-8090"]
+2018-03-04 21:43:05.325 [main] INFO  org.apache.tomcat.util.net.NioSelectorPool -
+				Using a shared selector for servlet write/read
+2018-03-04 21:43:05.400 [main] INFO  o.s.b.c.e.tomcat.TomcatEmbeddedServletContainer -
+				Tomcat started on port(s): 8090 (http)
+2018-03-04 21:43:05.404 [main] INFO  com.fictionNote.Application -
+				Started Application in 42.658 seconds (JVM running for 120.138)
+2018-03-04 21:43:24.818 [http-nio-8090-exec-2] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] -
+				Initializing Spring FrameworkServlet 'dispatcherServlet'
+2018-03-04 21:43:24.818 [http-nio-8090-exec-2] INFO  org.springframework.web.servlet.DispatcherServlet -
+				FrameworkServlet 'dispatcherServlet': initialization started
+2018-03-04 21:43:24.832 [http-nio-8090-exec-2] INFO  org.springframework.web.servlet.DispatcherServlet -
+				FrameworkServlet 'dispatcherServlet': initialization completed in 14 ms
+2018-03-04 21:43:25.039 [http-nio-8090-exec-2] INFO  org.mongodb.driver.connection -
+				Opened connection [connectionId{localValue:2, serverValue:14}] to localhost:27017
+2018-03-04 22:40:00.764 [RMI TCP Connection(2)-127.0.0.1] INFO  o.s.b.a.SpringApplicationAdminMXBeanRegistrar$SpringApplicationAdmin -
+				Application shutdown requested.
+2018-03-04 22:40:00.919 [RMI TCP Connection(2)-127.0.0.1] INFO  o.s.b.c.e.AnnotationConfigEmbeddedWebApplicationContext -
+				Closing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@6d763516: startup date [Sun Mar 04 21:42:32 CST 2018]; root of context hierarchy
+2018-03-04 22:40:01.837 [RMI TCP Connection(2)-127.0.0.1] INFO  o.s.jmx.export.annotation.AnnotationMBeanExporter -
+				Unregistering JMX-exposed beans on shutdown
+2018-03-04 22:40:01.979 [RMI TCP Connection(2)-127.0.0.1] INFO  org.mongodb.driver.connection -
+				Closed connection [connectionId{localValue:2, serverValue:14}] to localhost:27017 because the pool has been closed.
+2018-03-04 23:04:27.616 [main] INFO  com.fictionNote.Application -
+				Starting Application on as with PID 16560 (started by asus in D:\Program Files\eclipse\workplace\fiction-note)
+2018-03-04 23:04:27.663 [main] INFO  com.fictionNote.Application -
+				The following profiles are active: dev
+2018-03-04 23:04:28.417 [background-preinit] INFO  org.hibernate.validator.internal.util.Version -
+				HV000001: Hibernate Validator 5.3.5.Final
+2018-03-04 23:04:28.883 [main] INFO  o.s.b.c.e.AnnotationConfigEmbeddedWebApplicationContext -
+				Refreshing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@6d763516: startup date [Sun Mar 04 23:04:28 CST 2018]; root of context hierarchy
+2018-03-04 23:04:30.444 [main] INFO  o.s.b.c.e.tomcat.TomcatEmbeddedServletContainer -
+				Tomcat initialized with port(s): 8090 (http)
+2018-03-04 23:04:30.468 [main] INFO  org.apache.catalina.core.StandardService -
+				Starting service [Tomcat]
+2018-03-04 23:04:30.469 [main] INFO  org.apache.catalina.core.StandardEngine -
+				Starting Servlet Engine: Apache Tomcat/8.5.23
+2018-03-04 23:04:30.720 [localhost-startStop-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] -
+				Initializing Spring embedded WebApplicationContext
+2018-03-04 23:04:30.720 [localhost-startStop-1] INFO  org.springframework.web.context.ContextLoader -
+				Root WebApplicationContext: initialization completed in 1837 ms
+2018-03-04 23:04:30.825 [localhost-startStop-1] INFO  o.s.boot.web.servlet.ServletRegistrationBean -
+				Mapping servlet: 'dispatcherServlet' to [/]
+2018-03-04 23:04:30.828 [localhost-startStop-1] INFO  o.s.boot.web.servlet.FilterRegistrationBean -
+				Mapping filter: 'characterEncodingFilter' to: [/*]
+2018-03-04 23:04:30.829 [localhost-startStop-1] INFO  o.s.boot.web.servlet.FilterRegistrationBean -
+				Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+2018-03-04 23:04:30.829 [localhost-startStop-1] INFO  o.s.boot.web.servlet.FilterRegistrationBean -
+				Mapping filter: 'httpPutFormContentFilter' to: [/*]
+2018-03-04 23:04:30.829 [localhost-startStop-1] INFO  o.s.boot.web.servlet.FilterRegistrationBean -
+				Mapping filter: 'requestContextFilter' to: [/*]
+2018-03-04 23:04:32.209 [main] INFO  org.mongodb.driver.cluster -
+				Cluster created with settings {hosts=[localhost:27017], mode=SINGLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500}
+2018-03-04 23:04:32.621 [cluster-ClusterId{value='5a9c0b0090aa7d40b0004e4a', description='null'}-localhost:27017] INFO  org.mongodb.driver.connection -
+				Opened connection [connectionId{localValue:1, serverValue:15}] to localhost:27017
+2018-03-04 23:04:32.623 [cluster-ClusterId{value='5a9c0b0090aa7d40b0004e4a', description='null'}-localhost:27017] INFO  org.mongodb.driver.cluster -
+				Monitor thread successfully connected to server with description ServerDescription{address=localhost:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[3, 6, 2]}, minWireVersion=0, maxWireVersion=6, maxDocumentSize=16777216, roundTripTimeNanos=703793}
+2018-03-04 23:04:33.298 [main] INFO  o.s.w.s.m.m.a.RequestMappingHandlerAdapter -
+				Looking for @ControllerAdvice: org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@6d763516: startup date [Sun Mar 04 23:04:28 CST 2018]; root of context hierarchy
+2018-03-04 23:04:33.336 [main] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping -
+				Mapped "{[/updateList],methods=[PUT]}" onto public void com.fictionNote.controller.BookListController.updateList(javax.servlet.http.HttpServletRequest)
+2018-03-04 23:04:33.337 [main] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping -
+				Mapped "{[/delInList],methods=[DELETE]}" onto public void com.fictionNote.controller.BookListController.delInList(javax.servlet.http.HttpServletRequest)
+2018-03-04 23:04:33.338 [main] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping -
+				Mapped "{[/getBookList],methods=[GET]}" onto public com.fictionNote.model.Result<java.lang.Object> com.fictionNote.controller.BookListController.getBookList(javax.servlet.http.HttpServletRequest)
+2018-03-04 23:04:33.338 [main] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping -
+				Mapped "{[/insertToList],methods=[POST]}" onto public void com.fictionNote.controller.BookListController.insertToList(javax.servlet.http.HttpServletRequest)
+2018-03-04 23:04:33.338 [main] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping -
+				Mapped "{[/addNote],methods=[POST]}" onto public java.lang.String com.fictionNote.controller.NoteController.addNote(javax.servlet.http.HttpServletRequest)
+2018-03-04 23:04:33.339 [main] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping -
+				Mapped "{[/test],methods=[GET]}" onto public com.fictionNote.model.Result<com.fictionNote.model.User> com.fictionNote.controller.UserController.test()
+2018-03-04 23:04:33.339 [main] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping -
+				Mapped "{[/loginUser],methods=[POST]}" onto public com.fictionNote.model.Result<com.fictionNote.model.User> com.fictionNote.controller.UserController.loginUser(javax.servlet.http.HttpServletRequest)
+2018-03-04 23:04:33.341 [main] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping -
+				Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+2018-03-04 23:04:33.341 [main] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping -
+				Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2018-03-04 23:04:33.368 [main] INFO  o.s.web.servlet.handler.SimpleUrlHandlerMapping -
+				Mapped URL path [/wahaha/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-03-04 23:04:33.368 [main] INFO  o.s.web.servlet.handler.SimpleUrlHandlerMapping -
+				Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-03-04 23:04:33.368 [main] INFO  o.s.web.servlet.handler.SimpleUrlHandlerMapping -
+				Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-03-04 23:04:33.394 [main] INFO  o.s.web.servlet.handler.SimpleUrlHandlerMapping -
+				Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-03-04 23:04:33.415 [main] WARN  o.s.b.a.t.AbstractTemplateResolverConfiguration -
+				Cannot find template location: classpath:/templates/ (please add some templates or check your Thymeleaf configuration)
+2018-03-04 23:04:34.159 [main] INFO  o.s.jmx.export.annotation.AnnotationMBeanExporter -
+				Registering beans for JMX exposure on startup
+2018-03-04 23:04:34.190 [main] INFO  org.apache.coyote.http11.Http11NioProtocol -
+				Initializing ProtocolHandler ["http-nio-8090"]
+2018-03-04 23:04:34.214 [main] INFO  org.apache.coyote.http11.Http11NioProtocol -
+				Starting ProtocolHandler ["http-nio-8090"]
+2018-03-04 23:04:34.293 [main] INFO  org.apache.tomcat.util.net.NioSelectorPool -
+				Using a shared selector for servlet write/read
+2018-03-04 23:04:34.328 [main] INFO  o.s.b.c.e.tomcat.TomcatEmbeddedServletContainer -
+				Tomcat started on port(s): 8090 (http)
+2018-03-04 23:04:34.332 [main] INFO  com.fictionNote.Application -
+				Started Application in 7.314 seconds (JVM running for 11.525)
+2018-03-04 23:07:15.926 [http-nio-8090-exec-2] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] -
+				Initializing Spring FrameworkServlet 'dispatcherServlet'
+2018-03-04 23:07:15.926 [http-nio-8090-exec-2] INFO  org.springframework.web.servlet.DispatcherServlet -
+				FrameworkServlet 'dispatcherServlet': initialization started
+2018-03-04 23:07:15.946 [http-nio-8090-exec-2] INFO  org.springframework.web.servlet.DispatcherServlet -
+				FrameworkServlet 'dispatcherServlet': initialization completed in 20 ms
+2018-03-04 23:07:16.150 [http-nio-8090-exec-2] INFO  org.mongodb.driver.connection -
+				Opened connection [connectionId{localValue:2, serverValue:20}] to localhost:27017
+2018-03-04 23:10:39.004 [RMI TCP Connection(2)-127.0.0.1] INFO  o.s.b.a.SpringApplicationAdminMXBeanRegistrar$SpringApplicationAdmin -
+				Application shutdown requested.
+2018-03-04 23:10:39.005 [RMI TCP Connection(2)-127.0.0.1] INFO  o.s.b.c.e.AnnotationConfigEmbeddedWebApplicationContext -
+				Closing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@6d763516: startup date [Sun Mar 04 23:04:28 CST 2018]; root of context hierarchy
+2018-03-04 23:10:39.014 [RMI TCP Connection(2)-127.0.0.1] INFO  o.s.jmx.export.annotation.AnnotationMBeanExporter -
+				Unregistering JMX-exposed beans on shutdown
+2018-03-04 23:10:39.016 [RMI TCP Connection(2)-127.0.0.1] INFO  org.mongodb.driver.connection -
+				Closed connection [connectionId{localValue:2, serverValue:20}] to localhost:27017 because the pool has been closed.
