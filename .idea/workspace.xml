@@ -3,6 +3,20 @@
   <component name="ChangeListManager">
     <list default="true" id="f8a7f6fe-8b58-47ad-b6e7-7f02f1fb4333" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/log/TestWeb.log.2018-02-25.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/log/TestWeb.log.2018-02-26.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/log/TestWeb.log.2018-03-01.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/log/TestWeb.log.2018-03-02.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/log/TestWeb.log.2018-03-03.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/log/TestWeb.log.2018-03-04.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/log/TestWeb.log.2018-03-05.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/log/TestWeb.log.2018-03-06.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/log/TestWeb.log.2018-03-07.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/log/TestWeb.log.2018-03-13.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/log/TestWeb.log.2018-03-26.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/log/TestWeb.log.2018-03-27.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/log/TestWeb.log.2018-03-31.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/log/TestWeb.log.2018-04-01.log" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/log/TestWeb.log.2018-04-17.log" beforeDir="false" afterPath="$PROJECT_DIR$/log/TestWeb.log.2018-04-17.log" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
@@ -75,6 +89,11 @@
             <path>
               <item name="fictionNote" type="b2602c69:ProjectViewProjectNode" />
               <item name="fiction-note" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="fictionNote" type="b2602c69:ProjectViewProjectNode" />
+              <item name="fiction-note" type="462c0819:PsiDirectoryNode" />
+              <item name="log" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="fictionNote" type="b2602c69:ProjectViewProjectNode" />
