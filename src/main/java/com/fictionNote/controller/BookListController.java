@@ -7,9 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import com.fictionNote.model.Book;
 import com.fictionNote.model.BookList;
@@ -51,16 +49,15 @@ public class BookListController {
 	
 	@RequestMapping(value="/delInList",method={ RequestMethod.POST})
 	@ResponseBody
-	public String delInList(HttpServletRequest request){
-		
-		String u = request.getParameter("userId");
-		String b = request.getParameter("bookId");
-		BookList bookList = blRepository.findByBookIdAndUserId(b, u);
-		if(bookList!=null) {
-			blRepository.delete(bookList);
-			return "success";
+	public String delInList(@RequestParam(value="books")String[] books, @RequestParam(value="userId")String userId){
+		if(books!=null && books.length > 0){
+			for(int i=0; i<books.length; i++){
+				if(blRepository.findByBookIdAndUserId(books[i], userId)!=null)
+					blRepository.delete(blRepository.findByBookIdAndUserId(books[i], userId));
+				else return "error";
+			}
 		}
-		return null;
+		return "success";
 	}
 	
 	@RequestMapping(value="/getUserBookList", method={ RequestMethod.POST})

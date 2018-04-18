@@ -90,9 +90,9 @@ public class BookController {
                 response.addHeader("Content-Disposition", "attachment; filename=\"" + gridFSDBFile.get("contentType") + "\"");   
                 // 向客户端输出文件  
                 gridFSDBFile.writeTo(os);
-                os.flush();  
-                os.close();  
-            }  
+                os.flush();
+                os.close();
+            }
 		} catch (Exception e) {
 			System.out.println(e);
 		}finally {
@@ -107,19 +107,18 @@ public class BookController {
 		bookRepository.delete(book);
 		return null;
 	}
-	
-	
+
 	@RequestMapping(value="/addBook", method={ RequestMethod.POST})
 	@ResponseBody
 	public String addBook(@RequestBody Book book) throws Exception{
-		System.out.println("===="+book+"====");
+		//System.out.println("===="+book+"====");
 		book.setTime(DateUtils.dateToString(new Date(), DateUtils.patternA));
 		book.setDtime(new Date());
 		book.setIscheck("0");
 		bookRepository.save(book);/**/
 		return "Success";
 	}
-	
+
 	@RequestMapping(value="/getBook", method={ RequestMethod.POST})
 	@ResponseBody
 	public Book get(@RequestParam(value="bid") String id) throws Exception{

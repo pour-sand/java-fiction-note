@@ -17,6 +17,7 @@ public class Book {
 	private String totalPage;
 	private String title;
 	private String subtitle;
+	private String originalName;
 	private String author;
 	private String translator;
 	private String picture;
