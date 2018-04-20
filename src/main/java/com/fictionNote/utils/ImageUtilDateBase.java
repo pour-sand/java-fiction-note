@@ -118,7 +118,6 @@ public class ImageUtilDateBase {
 		try {
 			DB db = mg.getDB(DBNAME);
 	        GridFS gridFS = new GridFS(db, collection);
-	        System.out.println("oooooo"+gridFS.getFileList().size());
 	        return gridFS.findOne(filename);
 		} catch (Exception e) {
 			logger.info(e.getMessage());

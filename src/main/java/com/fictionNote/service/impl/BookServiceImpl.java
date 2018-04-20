@@ -34,7 +34,6 @@ public class BookServiceImpl implements BookService{
 				books.add(book);
 			}
 		}
-		System.out.println(books);
 		return books;
 	}
 	
@@ -47,7 +46,6 @@ public class BookServiceImpl implements BookService{
 			String time = bl.get(i).getTime();
 			//Date date = bl.get(i).getDtime();//DateUtils.stringToDate(time, "EEE MMM dd HH:mm:ss Z yyyy");
 			//time = DateUtils.dateToString(date, "yyyy-MM-dd HH:mm");
-			System.out.println("time======="+time);
 			book.setTime(time);
 			books.add(book);
 		}

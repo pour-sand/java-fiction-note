@@ -30,17 +30,33 @@ public class DateUtils {
 		else return -1;
 	}
 	public static String formateRecordTime(String time){
-    	return time.replace("T", " ").split(".")[0];
+    	return time.replace("T", " ").substring(0, 19);
+	}
+	public static int countDuring(String t1, String t2) throws Exception{
+		SimpleDateFormat sdf = new SimpleDateFormat(patternC);
+		Date d1 = null;
+		Date d2 = null;
+
+		try {
+			d1 = sdf.parse(t1);
+			d2 = sdf.parse(t2);
+		} catch (ParseException pe){
+			System.out.println(pe.getMessage());
+		}
+		long dd1 = d1.getTime();
+		long dd2 = d2.getTime();
+		double hours = (double)(dd2-dd1)/3600/1000;
+		System.out.println("时间差是："+hours+"（小时）");
+		return (int) ((dd2 - dd1)/(1000 * 60));
 	}
     public static String formateNoteTime(Date date){
     	return dateToString(date, patternB);
     }
     public static String formateNoteTime(String s){
-    	return s.replace("T", " ").substring(0, 16);
+    	return s.replace("T", " ").substring(0, 19);
     }
     public static boolean compareNoteTime(String t1, String t2){
     	Date d1 = stringToDate(formateNoteTime(t1), patternB);
-    	System.out.println("time---"+d1);
     	Date d2 = stringToDate(formateNoteTime(t2), patternB);
     	return d1.before(d2) || d1.equals(d2);
     }

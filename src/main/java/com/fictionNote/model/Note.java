@@ -15,10 +15,11 @@ public class Note {
 	private String title;
 	private String fromPage, toPage;
 	private String content;
-	private String timeb;
-	private String timee;
+	//private String timeb;
+	//private String timee;
 	private String time;
 	private String visible;
+	private String[] like;
 	
 	@Override
 	public int hashCode() {

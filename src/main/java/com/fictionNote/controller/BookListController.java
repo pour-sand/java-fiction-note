@@ -28,7 +28,6 @@ public class BookListController {
 	public String insertToList(HttpServletRequest request){
 		String u = request.getParameter("userId");
 		String b = request.getParameter("bookId");
-		System.out.println("uid bid===="+u+" "+b);
 		if(blRepository.findByBookIdAndUserId(b, u) != null){
 			return "existed";
 		}

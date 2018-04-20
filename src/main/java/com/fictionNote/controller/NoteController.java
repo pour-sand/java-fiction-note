@@ -28,16 +28,15 @@ public class NoteController {
 	@RequestMapping(value = "/addNote", method = { RequestMethod.POST})
 	@ResponseBody
 	public String addNote(@RequestBody Note note) {
-		System.out.println(note);
 		note.setTime(DateUtils.formateNoteTime(new Date()));
-		if(!DateUtils.compareNoteTime(note.getTimeb(), note.getTimee())
+		/*if(!DateUtils.compareNoteTime(note.getTimeb(), note.getTimee())
 				|| !DateUtils.compareNoteTime(note.getTimee(), note.getTime())){
 			return "Wrong time error";
-		}
+		}*/
 		if(note.getId()!=null && note.getId()!="")
 			noteRepository.delete(noteRepository.findById(note.getId()));
-		note.setTimeb(DateUtils.formateNoteTime(note.getTimeb()));
-		note.setTimee(DateUtils.formateNoteTime(note.getTimee()));
+		//note.setTimeb(DateUtils.formateNoteTime(note.getTimeb()));
+		//note.setTimee(DateUtils.formateNoteTime(note.getTimee()));
 		noteRepository.save(note);
 		//noteService.addNote(note);
 		return "success";
@@ -46,21 +45,18 @@ public class NoteController {
 	@RequestMapping(value = "/userAllNotes", method = { RequestMethod.POST})
 	@ResponseBody
 	public List<Note> getNotes(HttpServletRequest request) {
-		//System.out.println("+++"+noteRepository.findByUserId(request.getParameter("uid")));
 		return noteRepository.findByUserId(request.getParameter("uid"));
 	}
 	
 	@RequestMapping(value = "/oneBookNotes", method = { RequestMethod.POST})
 	@ResponseBody
 	public List<Note> getOneBookNotes(HttpServletRequest request) {
-		//System.out.println("+++"+noteRepository.findByUserId(request.getParameter("uid")));
 		return noteService.oneBookNotes(request.getParameter("bid"));
 	}
 	
 	@RequestMapping(value = "/deleteNote", method = { RequestMethod.POST})
 	@ResponseBody
 	public String delNote(HttpServletRequest request) {
-		//System.out.println("+++"+noteRepository.findByUserId(request.getParameter("uid")));
 		Note note = noteRepository.findById(request.getParameter("id"));
 		if(note != null) {
 			noteRepository.delete(note);

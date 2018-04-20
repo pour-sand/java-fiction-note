@@ -20,24 +20,30 @@ public class RecordTimeController {
     private TimeRepository timeRepository;
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private BookController bookController;
 
     @RequestMapping(value = "/addRecordTime", method = { RequestMethod.POST})
     @ResponseBody
-    public String addNote(@RequestBody Time time) {
-        System.out.println(time);
+    public String addTime(@RequestBody Time time) throws Exception{
+        if(time.getBegin()=="" || time.getEnd()=="") return "Failed! null time";
         time.setBegin(DateUtils.formateRecordTime(time.getBegin()));
         time.setEnd(DateUtils.formateRecordTime(time.getEnd()));
-        /*time.setBegin(DateUtils.formateNoteTime(new Date()));
-        if(!DateUtils.compareNoteTime(time.getBookId(), time.getEnd()))
-                || !DateUtils.compareNoteTime(time.getTimee(), time.getTime())){
-            return "Wrong time error";
+        if(time.getType() == "To do"){
+            time.setFromPage("");
+            time.setToPage("");
+        }else{
+            if(time.getFromPage() == "0" && time.getToPage() == "0") time.setFromPage("1");
+            if(time.getToPage() == "0") time.setToPage(bookController.get(time.getBooks()[0]).getTotalPage());
         }
-        if(time.getId()!=null && time.getId()!="")
-            timeRepository.delete(timeRepository.findById(time.getId()));
-        time.setTimeb(DateUtils.formateNoteTime(time.getTimeb()));
-        time.setTimee(DateUtils.formateNoteTime(time.getTimee()));*/
-        timeRepository.save(time);
+        int during = DateUtils.countDuring(time.getBegin(), time.getEnd());
+        if(during<0)    return "Failed! end time before start time";
+        time.setDuring(Integer.toString(during));
 
+        if(time.getId()!="" && timeRepository.findById(time.getId())!=null){
+            timeRepository.delete(timeRepository.findById(time.getId()));
+        }
+        timeRepository.save(time);
         return "success";
     }
 

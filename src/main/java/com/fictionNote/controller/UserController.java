@@ -36,7 +36,6 @@ public class UserController {
 	public Result<User> loginUser(HttpServletRequest request) {
 		String name = request.getParameter("username");
 		String password = request.getParameter("password");
-		System.out.println("username "+name);
 		User user = new User();
 		if(userRepository.findByUserName(name) != null){
 			user = userRepository.findByUserNameAndPassword(name, password);
@@ -65,7 +64,6 @@ public class UserController {
 		try {
 			DB db = mg.getDB(ImageUtilDateBase.DBNAME);
 	        GridFS gridFS = new GridFS(db, COLLECTION);
-	        System.out.println("====="+gridFS.getFileList().size());
 	        GridFSDBFile gridFSDBFile = gridFS.findOne(filename);
 	        if (gridFSDBFile != null) {           
 	        	response.setContentType(gridFSDBFile.getContentType());
@@ -89,7 +87,6 @@ public class UserController {
 	@RequestMapping(value="/uploadPortrait", method={ RequestMethod.POST})
 	@ResponseBody
 	public String saveImg(@RequestParam(value="upfile", required=false) MultipartFile upfile) throws Exception{
-		System.out.println(upfile == null);
 		return ImageUtilDateBase.saveImage(upfile, COLLECTION);
 	}
 }

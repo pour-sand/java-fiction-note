@@ -66,7 +66,6 @@ public class BookController {
 	@RequestMapping(value="/uploadImg", method={ RequestMethod.POST})
 	@ResponseBody
 	public String saveImg(@RequestParam(value="upfile", required=false) MultipartFile upfile) throws Exception{
-		System.out.println(upfile == null);
 		return ImageUtilDateBase.saveImage(upfile, COLLECTION);
 	}
 	
@@ -79,7 +78,6 @@ public class BookController {
 		try {
 			DB db = mg.getDB(ImageUtilDateBase.DBNAME);
 	        GridFS gridFS = new GridFS(db, COLLECTION);
-	        System.out.println("====="+gridFS.getFileList().size());
 	        GridFSDBFile gridFSDBFile = gridFS.findOne(filename);
 	        if (gridFSDBFile != null) {           
 	        	response.setContentType(gridFSDBFile.getContentType());
@@ -111,7 +109,6 @@ public class BookController {
 	@RequestMapping(value="/addBook", method={ RequestMethod.POST})
 	@ResponseBody
 	public String addBook(@RequestBody Book book) throws Exception{
-		//System.out.println("===="+book+"====");
 		book.setTime(DateUtils.dateToString(new Date(), DateUtils.patternA));
 		book.setDtime(new Date());
 		book.setIscheck("0");
