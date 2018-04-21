@@ -1,6 +1,7 @@
 package com.fictionNote.controller;
 
 import com.fictionNote.model.Time;
+import com.fictionNote.model.TimelineItem;
 import com.fictionNote.repository.TimeRepository;
 import com.fictionNote.repository.UserRepository;
 import com.fictionNote.utils.DateUtils;
@@ -9,19 +10,48 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 @Controller
 public class RecordTimeController {
+    private static final String ALL_ITEMS = "0";
+    private static final String READING_ITEMS = "1";
+    private static final String NOTE_ITEMS = "2";
+    private static final String READING_AND_NOTE_ITEMS = "3";
     @Autowired
     private TimeRepository timeRepository;
     @Autowired
     private UserRepository userRepository;
     @Autowired
     private BookController bookController;
+
+    @RequestMapping(value="/getTodo",method={ RequestMethod.GET})
+    @ResponseBody
+    public List<Time> usrInfo(HttpServletRequest request) {
+        String name = request.getCookies()[0].getValue();
+        List<Time> times = timeRepository.findByUserIdAndType(userRepository.findByUserName(name).getId(), "To do");
+        return times;
+    }
+
+    @RequestMapping(value="/checkDone",method={ RequestMethod.POST})
+    @ResponseBody
+    public String updataMsg(@RequestParam(value="id", required=true) String id,
+                            @RequestParam(value="msg", required=false) String msg) throws Exception{
+        Time time = timeRepository.findById(id);
+        timeRepository.delete(time);
+        if(msg.equals("100")) {
+            time.setType("Done");
+            time.setMsg("");
+            time.setFromPage("1");
+            time.setToPage(bookController.get(time.getBooks()[0]).getTotalPage());
+            timeRepository.save(time);
+            return "done";
+        }else{
+            time.setMsg(msg);
+        }timeRepository.save(time);
+        return "success";
+
+    }
 
     @RequestMapping(value = "/addRecordTime", method = { RequestMethod.POST})
     @ResponseBody
@@ -57,9 +87,17 @@ public class RecordTimeController {
         return timeRepository.findByUserId(uid);
     }
 
+    @RequestMapping(value = "/timeline", method = { RequestMethod.POST})
+    @ResponseBody
+    public List<TimelineItem> delTime(@RequestParam(value="type", required=true) String type) {
+        List<TimelineItem> items = new ArrayList<TimelineItem>();
+        Collections.sort(items);
+        return items;
+    }
+
     @RequestMapping(value = "/delTime", method = { RequestMethod.POST})
     @ResponseBody
-    public String delTime(@RequestBody List<Time> times) {
+    public String timeline(@RequestBody List<Time> times) {
         Iterator iterator = times.iterator();
         List<Time> delTimeList = new ArrayList<Time>();
         while(iterator.hasNext()){

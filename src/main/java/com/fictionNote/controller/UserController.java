@@ -1,10 +1,12 @@
 package com.fictionNote.controller;
 
 import java.io.OutputStream;
+import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.fictionNote.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -40,6 +42,8 @@ public class UserController {
 		if(userRepository.findByUserName(name) != null){
 			user = userRepository.findByUserNameAndPassword(name, password);
 			if(user != null){
+				//String loginTime[] = user.getLoginTime();
+				//loginTime[loginTime.length] = DateUtils.dateToString(new Date(), DateUtils.patternA);
 				return new Result<User>(100, "success", user);
 			}else{
 				return new Result<User>(101, "Please input right password", null);
@@ -48,13 +52,17 @@ public class UserController {
 		return new Result<User>(102, "Please input right username", null);
 	}
 	
-	@RequestMapping(value="/test",method={ RequestMethod.GET})
+	@RequestMapping(value="/getUserInfo",method={ RequestMethod.GET})
 	@ResponseBody
-	public Result<User> test() {
-		return new Result<User>(102, "Please input right username", null);
+	public User usrInfo(@RequestParam(value="name", required=true) String name) {
+		User user = userRepository.findByUserName(name);
+		user.setPassword("");
+		return user;
 	}
+	/*@RequestMapping(value = "/findComp/{id}",method ={ RequestMethod.GET })
+	@ResponseBody
+	public Result findCompanyById(@PathVariable String id)*/
 
-	
 	@RequestMapping(value="/getPortrait", method={ RequestMethod.GET})
 	public void getImg(@RequestParam(value="filename", required=false) String filename, HttpServletResponse response) throws Exception{
 		OutputStream os = response.getOutputStream();
