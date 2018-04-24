@@ -20,6 +20,7 @@ public class Note {
 	private String time;
 	private String visible;
 	private String[] like;
+	private Review[] reviews;
 	
 	@Override
 	public int hashCode() {

@@ -29,6 +29,17 @@ public class DateUtils {
 		else if(s.equals("Sun")) return 7;
 		else return -1;
 	}
+	public boolean isLatest(Date check,Date now,int days){
+		Calendar calendar = Calendar.getInstance();  //得到日历
+		calendar.setTime(now);//把当前时间赋给日历
+		calendar.add(Calendar.DAY_OF_MONTH, -days);  //设置为7天前
+		Date before7days = calendar.getTime();   //得到7天前的时间
+		if(before7days.getTime() < check.getTime()){
+			return true;
+		}else{
+			return false;
+		}
+	}
 	public static String formateRecordTime(String time){
     	return time.replace("T", " ").substring(0, 19);
 	}

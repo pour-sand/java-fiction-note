@@ -1,10 +1,10 @@
 package com.fictionNote.controller;
 
-import com.fictionNote.model.Time;
-import com.fictionNote.model.TimelineItem;
-import com.fictionNote.repository.TimeRepository;
-import com.fictionNote.repository.UserRepository;
+import com.fictionNote.model.*;
+import com.fictionNote.repository.*;
+import com.fictionNote.service.TimeService;
 import com.fictionNote.utils.DateUtils;
+import javafx.animation.Timeline;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -15,15 +15,18 @@ import java.util.*;
 @Controller
 public class RecordTimeController {
     private static final String ALL_ITEMS = "0";
-    private static final String READING_ITEMS = "1";
+    private static final String TIME_ITEMS = "1";
     private static final String NOTE_ITEMS = "2";
     private static final String READING_AND_NOTE_ITEMS = "3";
+
     @Autowired
     private TimeRepository timeRepository;
     @Autowired
     private UserRepository userRepository;
     @Autowired
     private BookController bookController;
+    @Autowired
+    private TimeService timeService;
 
     @RequestMapping(value="/getTodo",method={ RequestMethod.GET})
     @ResponseBody
@@ -87,17 +90,37 @@ public class RecordTimeController {
         return timeRepository.findByUserId(uid);
     }
 
-    @RequestMapping(value = "/timeline", method = { RequestMethod.POST})
+
+    @RequestMapping(value = "/timeline", method = { RequestMethod.GET})
     @ResponseBody
-    public List<TimelineItem> delTime(@RequestParam(value="type", required=true) String type) {
+    public List<TimelineItem> timeline(@RequestParam(value="type", required=true) String type,
+                                       @RequestParam(value="sort", required=true) String sort,HttpServletRequest request) {
+        String name = "";
+        if(request.getCookies()[0] != null) name = request.getCookies()[0].getValue();
+        String uid = userRepository.findByUserName(name).getId();
         List<TimelineItem> items = new ArrayList<TimelineItem>();
+
+        if(type.equals(ALL_ITEMS)){
+            items.addAll(timeService.putBookList());
+            items.addAll(timeService.putNotes());
+            items.addAll(timeService.putTimes());
+        }else if(type.equals(TIME_ITEMS)){
+            items.addAll(timeService.putTimes());
+        }else if (type.equals(NOTE_ITEMS)) {
+            items.addAll(timeService.putNotes());
+        }else if(type.equals(READING_AND_NOTE_ITEMS)){
+            items.addAll(timeService.putNotes());
+            items.addAll(timeService.putTimes());
+        }
+        //System.out.println(items);
         Collections.sort(items);
+        if(sort.equals("0")) Collections.reverse(items);
         return items;
     }
 
     @RequestMapping(value = "/delTime", method = { RequestMethod.POST})
     @ResponseBody
-    public String timeline(@RequestBody List<Time> times) {
+    public String delTime(@RequestBody List<Time> times) {
         Iterator iterator = times.iterator();
         List<Time> delTimeList = new ArrayList<Time>();
         while(iterator.hasNext()){
@@ -109,4 +132,14 @@ public class RecordTimeController {
         timeRepository.delete(delTimeList);
         return "success";
     }
+
+    @RequestMapping(value = "/recentReading", method = { RequestMethod.GET})
+    @ResponseBody
+    public String recentReading(@RequestParam(value="days", required=true) String days, HttpServletRequest request) {
+        String name = "";
+        if(request.getCookies()[0] != null) name = request.getCookies()[0].getValue();
+        String uid = userRepository.findByUserName(name).getId();
+        return null;
+    }
+
 }
