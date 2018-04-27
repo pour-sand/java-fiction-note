@@ -4,6 +4,8 @@ import com.fictionNote.model.*;
 import com.fictionNote.repository.*;
 import com.fictionNote.service.TimeService;
 import com.fictionNote.utils.DateUtils;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import javafx.animation.Timeline;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -139,7 +141,9 @@ public class RecordTimeController {
         String name = "";
         if(request.getCookies()[0] != null) name = request.getCookies()[0].getValue();
         String uid = userRepository.findByUserName(name).getId();
-        return null;
+        Map map = timeService.recentTimes(uid, Integer.valueOf(days));
+        Gson gson = new GsonBuilder().enableComplexMapKeySerialization().create();
+        return gson.toJson(map);
     }
 
 }
