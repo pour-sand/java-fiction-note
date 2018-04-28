@@ -1,0 +1,7 @@
+target/
+
+/stacktrace.log
+/test/reports
+/logs
+*.log
+*.class

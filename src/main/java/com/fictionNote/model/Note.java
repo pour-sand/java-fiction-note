@@ -5,6 +5,8 @@ import lombok.Setter;
 import lombok.ToString;
 import org.springframework.data.annotation.Id;
 
+import java.util.List;
+
 @Getter@Setter
 @ToString
 public class Note {
@@ -19,8 +21,8 @@ public class Note {
 	//private String timee;
 	private String time;
 	private String visible;
-	private String[] like;
-	private Review[] reviews;
+	private List<Review> reviews;
+	private List<String> likes;
 	
 	@Override
 	public int hashCode() {

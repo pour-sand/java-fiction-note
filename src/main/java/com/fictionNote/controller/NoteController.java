@@ -6,9 +6,11 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.fictionNote.model.Review;
 import com.fictionNote.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import com.fictionNote.model.Note;
@@ -42,13 +44,13 @@ public class NoteController {
 		return "success";
 	}
 	
-	@RequestMapping(value = "/userAllNotes", method = { RequestMethod.POST})
+	@RequestMapping(value = "/userAllNotes", method = { RequestMethod.GET})
 	@ResponseBody
 	public List<Note> getNotes(HttpServletRequest request) {
 		return noteRepository.findByUserId(request.getParameter("uid"));
 	}
 	
-	@RequestMapping(value = "/oneBookNotes", method = { RequestMethod.POST})
+	@RequestMapping(value = "/oneBookNotes", method = { RequestMethod.GET})
 	@ResponseBody
 	public List<Note> getOneBookNotes(HttpServletRequest request) {
 		return noteService.oneBookNotes(request.getParameter("bid"));
@@ -65,12 +67,40 @@ public class NoteController {
 		return null;
 	}
 
-	@RequestMapping(value = "/addReview", method = { RequestMethod.GET})
+	@RequestMapping(value = "/addReview", method = { RequestMethod.POST})
 	@ResponseBody
-	public String addReview(@RequestParam(value="days", required=true) String days, HttpServletRequest request) {
+	public String addReview(@RequestBody Note note, HttpServletRequest request) {
+		System.out.println("note "+note.getReviews());
 		String name = "";
 		if(request.getCookies()[0] != null) name = request.getCookies()[0].getValue();
 		String uid = userRepository.findByUserName(name).getId();
-		return null;
+		Note n = noteRepository.findById(note.getId());
+		List<Review> rs=n.getReviews();
+		rs.add(note.getReviews().get(0));
+		n.setReviews(rs);
+		noteRepository.delete(n);
+		noteRepository.save(n);
+		return "success";
+	}
+
+	@RequestMapping(value = "/addLike", method = { RequestMethod.POST})
+	@ResponseBody
+	public String addLike(HttpServletRequest request) {
+		String name = "";
+		if(request.getCookies()[0] != null) name = request.getCookies()[0].getValue();
+		//String uid = userRepository.findByUserName(name).getId();
+		Note note = noteRepository.findById(request.getParameter("id"));
+		List<String> likes = note.getLikes();
+		if(likes.contains(name)){
+			likes.remove(name);
+
+		}else{
+			likes.add(name);
+		}
+		note.setLikes(likes);
+		noteRepository.delete(note);
+		noteRepository.save(note);
+		if(likes.contains(name))	return "removed";
+		return "added";
 	}
 }
