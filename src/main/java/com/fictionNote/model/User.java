@@ -1,6 +1,7 @@
 package com.fictionNote.model;
 
 import java.util.Arrays;
+import java.util.List;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -19,6 +20,7 @@ public class User {
 	private String time;
 	private String role;
 	private String photo;
-	private String[] loginTime;
+	private String phone;
+	private List<String> loginTime;
 	
 }

@@ -12,6 +12,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.fictionNote.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -34,18 +35,26 @@ import com.mongodb.gridfs.GridFSDBFile;
 @Controller
 public class BookController {
 	public static final String COLLECTION = "bookitem";
+	public static final String ADMIN="0";
+	public static final String READER="1";
+	public static final String TRUE = "1";
+	public static final String FALSE = "0";
 	@Autowired
 	BookRepository bookRepository;
+	@Autowired
+	UserRepository userRepository;
 	@Autowired
 	BookService bookService;
 	
 	@RequestMapping(value="/admin/allBooks",method={ RequestMethod.GET})
 	@ResponseBody
-	public List<Book> getBooks(){
+	public List<Book> getBooks(@RequestParam(value="check") String check){
+		if(check.equals(FALSE))
+			return bookRepository.findByIscheck(FALSE);
 		return bookRepository.findAll();
 	}
 	
-	@RequestMapping(value="/allBooks",method={ RequestMethod.POST})
+	@RequestMapping(value="/allBooks",method={ RequestMethod.GET})
 	@ResponseBody
 	public List<Book> getCheckedBooks(@RequestParam(value="uid") String uid){
 		return bookService.checkList(bookRepository.findByIscheck("1"), uid);
@@ -109,12 +118,20 @@ public class BookController {
 	@RequestMapping(value="/addBook", method={ RequestMethod.POST})
 	@ResponseBody
 	public String addBook(@RequestBody Book book) throws Exception{
+		System.out.println(book.getPubTime());
 		book.setTime(DateUtils.dateToString(new Date(), DateUtils.patternA));
 		book.setDtime(new Date());
-		book.setIscheck("0");
+		String role="";
+		if(userRepository.findById(book.getUid())!=null){
+			role=userRepository.findById(book.getUid()).getRole();
+		}
+		if(role.equals(ADMIN)) book.setIscheck(TRUE);
+		else book.setIscheck(FALSE);
 		bookRepository.save(book);/**/
 		return "Success";
 	}
+
+
 
 	@RequestMapping(value="/getBook", method={ RequestMethod.POST})
 	@ResponseBody

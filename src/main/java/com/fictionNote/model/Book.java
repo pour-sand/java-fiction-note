@@ -14,7 +14,7 @@ import lombok.ToString;
 public class Book {
 	@Id
 	private String id;
-	private String totalPage;
+	private int totalPage;
 	private String title;
 	private String subtitle;
 	private String originalName;

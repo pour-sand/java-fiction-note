@@ -1,13 +1,14 @@
 package com.fictionNote.controller;
 
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
 
 import com.fictionNote.model.Review;
+import com.fictionNote.repository.BookRepository;
 import com.fictionNote.repository.UserRepository;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,6 +27,8 @@ public class NoteController {
 	NoteRepository noteRepository;
 	@Autowired
 	UserRepository userRepository;
+	@Autowired
+	BookRepository bookRepository;
 	
 	@RequestMapping(value = "/addNote", method = { RequestMethod.POST})
 	@ResponseBody
@@ -35,7 +38,7 @@ public class NoteController {
 				|| !DateUtils.compareNoteTime(note.getTimee(), note.getTime())){
 			return "Wrong time error";
 		}*/
-		if(note.getId()!=null && note.getId()!="")
+		if(note.getId()!=null && !note.getId().equals(""))
 			noteRepository.delete(noteRepository.findById(note.getId()));
 		//note.setTimeb(DateUtils.formateNoteTime(note.getTimeb()));
 		//note.setTimee(DateUtils.formateNoteTime(note.getTimee()));
@@ -71,9 +74,7 @@ public class NoteController {
 	@ResponseBody
 	public String addReview(@RequestBody Note note, HttpServletRequest request) {
 		System.out.println("note "+note.getReviews());
-		String name = "";
-		if(request.getCookies()[0] != null) name = request.getCookies()[0].getValue();
-		String uid = userRepository.findByUserName(name).getId();
+
 		Note n = noteRepository.findById(note.getId());
 		List<Review> rs=n.getReviews();
 		rs.add(note.getReviews().get(0));
@@ -93,14 +94,113 @@ public class NoteController {
 		List<String> likes = note.getLikes();
 		if(likes.contains(name)){
 			likes.remove(name);
-
+			note.setLikes(likes);
+			noteRepository.delete(note);
+			noteRepository.save(note);
+			return "removed";
 		}else{
-			likes.add(name);
+			likes.add(name);note.setLikes(likes);
+			noteRepository.delete(note);
+			noteRepository.save(note);
+			return "added";
 		}
-		note.setLikes(likes);
-		noteRepository.delete(note);
-		noteRepository.save(note);
-		if(likes.contains(name))	return "removed";
-		return "added";
+	}
+
+	@RequestMapping(value = "/getLikeNum", method = { RequestMethod.GET})
+	@ResponseBody
+	public String likeN(HttpServletRequest request) {
+		String name = "";
+		if(request.getCookies()[0] != null) name = request.getCookies()[0].getValue();
+		String uid = userRepository.findByUserName(name).getId();
+		List<Note> notes = noteRepository.findByUserId(uid);
+		Map<String, String> likes = new HashMap<String, String>();
+		int n = 0;
+		for(int i=0; i<notes.size(); i++){
+			List<String> like =  notes.get(i).getLikes();
+			String book = bookRepository.findById(notes.get(i).getBookId()).getTitle();
+			for(int j=0; j<like.size(); j++){
+				likes.put(book, like.get(j));
+			}
+		}
+		Gson gson = new GsonBuilder().enableComplexMapKeySerialization().create();
+		return gson.toJson(likes);
+	}
+
+	@RequestMapping(value = "/getReviewNum", method = { RequestMethod.GET})
+	@ResponseBody
+	public List<Review> reviewN(HttpServletRequest request) {
+		String name = "";
+		if(request.getCookies()[0] != null) name = request.getCookies()[0].getValue();
+		String uid = userRepository.findByUserName(name).getId();
+		List<Note> notes = noteRepository.findByUserId(uid);
+		List<Review> res = new ArrayList<Review>();
+		for(int i=0; i<notes.size(); i++){
+			String book = bookRepository.findById(notes.get(i).getBookId()).getTitle();
+			List<Review> reviews = notes.get(i).getReviews();
+			for(int j=0; j<reviews.size(); j++){
+				String user = reviews.get(j).getUser();
+				String photo = userRepository.findByUserName(user).getPhoto();
+				reviews.get(j).setInfo(photo);
+				reviews.get(j).setType(book);
+			}
+			res.addAll(reviews);
+		}
+		return res;
+	}
+
+	@RequestMapping(value = "/getReviewUnChecked", method = { RequestMethod.GET})
+	@ResponseBody
+	public List<Review> reviewNUnchecked(HttpServletRequest request) {
+		List<Review> res = reviewN(request);
+		Iterator<Review> it = res.iterator();
+		while (it.hasNext()){
+			Review r = it.next();
+			if(r.isChecked()) it.remove();
+		}
+		return res;
+	}
+
+	/*@RequestMapping(value = "/getReviewNum", method = { RequestMethod.GET})
+	@ResponseBody
+	public String reviewCheck(HttpServletRequest request) {
+		String name = "";
+		if(request.getCookies()[0] != null) name = request.getCookies()[0].getValue();
+		String uid = userRepository.findByUserName(name).getId();
+		List<Note> notes = noteRepository.findByUserId(uid);
+		List<Review> res = new ArrayList<Review>();
+		for(int i=0; i<notes.size(); i++){
+			List<Review> reviews = notes.get(i).getReviews();
+			for(int j=0; j<reviews.size(); j++){
+
+			}
+			res.addAll(reviews);
+		}
+		return "";
+	}*/
+
+	@RequestMapping(value = "/checkMsg", method = { RequestMethod.POST})
+	@ResponseBody
+	public String checkMsg(@RequestBody List<Review> res, HttpServletRequest request) {
+		String name = "";
+		if(request.getCookies()[0] != null) name = request.getCookies()[0].getValue();
+		String uid = userRepository.findByUserName(name).getId();
+		List<Note> notes = noteRepository.findByUserId(uid);
+		boolean change = false;
+		for(int i=0; i<notes.size(); i++){
+			List<Review> rs = notes.get(i).getReviews();
+			for(int j=0; j<rs.size(); j++){
+				for(int k=0; k<res.size(); k++){
+					if(res.get(k).getId().equals(rs.get(j).getId())) {
+						rs.get(j).setChecked(true);
+						change = true;
+					}
+				}
+			}
+			if(change){
+				notes.get(i).setReviews(rs);
+				noteRepository.save(notes.get(i));
+			}
+		}
+		return "success";
 	}
 }

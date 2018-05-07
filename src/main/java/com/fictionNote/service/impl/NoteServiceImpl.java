@@ -23,7 +23,7 @@ public class NoteServiceImpl implements NoteService {
 	}
 	
 	public List<Note> oneBookNotes(String bid) {
-		List<Note> notes = noteRepository.findByBookIdAndVisible(bid, "true");
+		List<Note> notes = noteRepository.findByBookIdAndVisible(bid, true);
 		Iterator<Note> it = notes.iterator();
 		while (it.hasNext()) {
 			Note note = it.next();

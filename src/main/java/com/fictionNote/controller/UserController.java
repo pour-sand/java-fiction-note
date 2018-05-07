@@ -1,7 +1,9 @@
 package com.fictionNote.controller;
 
 import java.io.OutputStream;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -9,10 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.fictionNote.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.fictionNote.model.Result;
@@ -33,7 +32,7 @@ public class UserController {
 	@Autowired
 	UserRepository userRepository;
 	
-	@RequestMapping(value="/loginUser",method={ RequestMethod.POST})
+	@RequestMapping(value="/loginUser",method={ RequestMethod.GET})
 	@ResponseBody
 	public Result<User> loginUser(HttpServletRequest request) {
 		String name = request.getParameter("username");
@@ -42,8 +41,11 @@ public class UserController {
 		if(userRepository.findByUserName(name) != null){
 			user = userRepository.findByUserNameAndPassword(name, password);
 			if(user != null){
-				//String loginTime[] = user.getLoginTime();
-				//loginTime[loginTime.length] = DateUtils.dateToString(new Date(), DateUtils.patternA);
+				List<String> loginTime = user.getLoginTime();
+				loginTime.add( DateUtils.dateToString(new Date(), DateUtils.patternA));
+				userRepository.delete(user);
+				user.setLoginTime(loginTime);
+				userRepository.save(user);
 				return new Result<User>(100, "success", user);
 			}else{
 				return new Result<User>(101, "Please input right password", null);
@@ -51,7 +53,34 @@ public class UserController {
 		}
 		return new Result<User>(102, "Please input right username", null);
 	}
-	
+
+	@RequestMapping(value="/addUser",method={ RequestMethod.POST})
+	@ResponseBody
+	public String addUser(@RequestBody User user) {
+
+		if(userRepository.findByUserName(user.getUserName()) == null){
+				List<String> loginTime = new ArrayList<String>();
+				loginTime.add(DateUtils.dateToString(new Date(), DateUtils.patternA));
+				user.setLoginTime(loginTime);
+				userRepository.save(user);
+				return "Sign up success";
+		}else{
+			return "existed";
+		}
+	}
+
+	@RequestMapping(value="/updateUser",method={ RequestMethod.POST})
+	@ResponseBody
+	public String updateUser(@RequestBody User user) {
+		if(userRepository.findByUserName(user.getUserName()) != null){
+			userRepository.delete(userRepository.findByUserName(user.getUserName()));
+			userRepository.save(user);
+			return "Sign up success";
+		}else{
+			return "existed";
+		}
+	}
+
 	@RequestMapping(value="/getUserInfo",method={ RequestMethod.GET})
 	@ResponseBody
 	public User usrInfo(@RequestParam(value="name", required=true) String name) {

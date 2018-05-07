@@ -22,7 +22,7 @@ import com.mongodb.gridfs.GridFSInputFile;
 
 public class ImageUtilDateBase {
 	private static final Logger logger = LoggerFactory.getLogger(ImageUtilDateBase.class);
-	public static final String DBNAME = "testdatabase";
+	public static final String DBNAME = "note_fiction";
 	public ImageUtilDateBase() {
 		
 	}

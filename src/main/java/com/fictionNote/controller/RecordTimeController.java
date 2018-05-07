@@ -47,7 +47,7 @@ public class RecordTimeController {
         if(msg.equals("100")) {
             time.setType("Done");
             time.setMsg("");
-            time.setFromPage("1");
+            time.setFromPage(1);
             time.setToPage(bookController.get(time.getBooks()[0]).getTotalPage());
             timeRepository.save(time);
             return "done";
@@ -65,11 +65,11 @@ public class RecordTimeController {
         time.setBegin(DateUtils.formateRecordTime(time.getBegin()));
         time.setEnd(DateUtils.formateRecordTime(time.getEnd()));
         if(time.getType() == "To do"){
-            time.setFromPage("");
-            time.setToPage("");
+            time.setFromPage(0);
+            time.setToPage(0);
         }else{
-            if(time.getFromPage() == "0" && time.getToPage() == "0") time.setFromPage("1");
-            if(time.getToPage() == "0") time.setToPage(bookController.get(time.getBooks()[0]).getTotalPage());
+            if(time.getFromPage() == 0 && time.getToPage() == 0) time.setFromPage(1);
+            if(time.getToPage() == 0) time.setToPage(bookController.get(time.getBooks()[0]).getTotalPage());
         }
         int during = DateUtils.countDuring(time.getBegin(), time.getEnd());
         if(during<0)    return "Failed! end time before start time";
@@ -103,16 +103,16 @@ public class RecordTimeController {
         List<TimelineItem> items = new ArrayList<TimelineItem>();
 
         if(type.equals(ALL_ITEMS)){
-            items.addAll(timeService.putBookList());
-            items.addAll(timeService.putNotes());
-            items.addAll(timeService.putTimes());
+            items.addAll(timeService.putBookList(uid));
+            items.addAll(timeService.putNotes(uid));
+            items.addAll(timeService.putTimes(uid));
         }else if(type.equals(TIME_ITEMS)){
-            items.addAll(timeService.putTimes());
+            items.addAll(timeService.putTimes(uid));
         }else if (type.equals(NOTE_ITEMS)) {
-            items.addAll(timeService.putNotes());
+            items.addAll(timeService.putNotes(uid));
         }else if(type.equals(READING_AND_NOTE_ITEMS)){
-            items.addAll(timeService.putNotes());
-            items.addAll(timeService.putTimes());
+            items.addAll(timeService.putNotes(uid));
+            items.addAll(timeService.putTimes(uid));
         }
         //System.out.println(items);
         Collections.sort(items);

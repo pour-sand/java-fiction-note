@@ -20,8 +20,8 @@ public class Time {
 	String msg;
 	String begin;
 	String end;
-	String fromPage;
-	String toPage;
+	int fromPage;
+	int toPage;
 	String during;
 
 	@Override

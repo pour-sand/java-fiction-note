@@ -10,6 +10,7 @@ import com.fictionNote.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Service
@@ -27,9 +28,9 @@ public class TimeServiceImpl implements TimeService {
     @Autowired
     private BookRepository bookRepository;
 
-    public List<TimelineItem> putBookList(){
+    public List<TimelineItem> putBookList(String uid){
         List<TimelineItem> items = new ArrayList<TimelineItem>();
-        Iterator it = bookListRepository.findAll().iterator();
+        Iterator it = bookListRepository.findByUserId(uid).iterator();
         while(it.hasNext()){
             BookList bl = (BookList) it.next();
             TimelineItem timeline = new TimelineItem();
@@ -41,9 +42,9 @@ public class TimeServiceImpl implements TimeService {
         return items;
     }
 
-    public List<TimelineItem> putNotes(){
+    public List<TimelineItem> putNotes(String uid){
         List<TimelineItem> items = new ArrayList<TimelineItem>();
-        Iterator it = noteRepository.findAll().iterator();
+        Iterator it = noteRepository.findByUserId(uid).iterator();
         while(it.hasNext()){
             Note note = (Note) it.next();
             TimelineItem timeline = new TimelineItem();
@@ -57,9 +58,9 @@ public class TimeServiceImpl implements TimeService {
         return items;
     }
 
-    public List<TimelineItem> putTimes(){
+    public List<TimelineItem> putTimes(String uid){
         List<TimelineItem> items = new ArrayList<TimelineItem>();
-        Iterator it = timeRepository.findAll().iterator();
+        Iterator it = timeRepository.findByUserId(uid).iterator();
         while(it.hasNext()){
             Time time = (Time) it.next();
             TimelineItem timeline = new TimelineItem();
@@ -78,7 +79,7 @@ public class TimeServiceImpl implements TimeService {
     public Map<String, Integer> recentTimes(String uid, int days){
         Map<String, Integer> map = new HashMap<String, Integer>();
         List<Time> times = timeRepository.findByUserIdAndType(uid, DONE);
-
+        //System.out.println(times);
         Iterator it = times.iterator();
         while(it.hasNext()){
             Time time = (Time)it.next();
@@ -113,24 +114,7 @@ public class TimeServiceImpl implements TimeService {
                 }
             }
         }
-        Map<String, Integer> newMap = new TreeMap<String, Integer>(
-            new Comparator<String>() {
-                public int compare(String o1, String o2) {
-                    if (DateUtils.stringToDate(o1, DateUtils.patternA).before(DateUtils.stringToDate(o2, DateUtils.patternA)))
-                        return -1;
-                    else return 1;
-                }
-            }
-
-            );
-        Set<Map.Entry<String, Integer>> set = map.entrySet();
-        Iterator<Map.Entry<String, Integer>> itMap = set.iterator();
-        while (itMap.hasNext()){
-            Map.Entry<String, Integer> next = itMap.next();
-            newMap.put(next.getKey(), next.getValue());
-        }
-        System.out.println(newMap);
-        return newMap;
+        return sortMap(map);
     }
 
     public String formatBeginTime(String begin){
@@ -162,14 +146,55 @@ public class TimeServiceImpl implements TimeService {
     public boolean checkDays(String day, int d){
         Date b = DateUtils.stringToDate(day, DateUtils.patternA);
         Date now = new Date();
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(now);
-        int dayNow = calendar.get(Calendar.DATE);
-        for(int i=0; i<=d; i++){
-            calendar.set(Calendar.DATE, dayNow-i);
-            if(DateUtils.dateToString(calendar.getTime(), DateUtils.patternA).equals(day))
-                return true;
-        }
+        long dayBetween = (now.getTime() - b.getTime()+1000000)/(3600*24*1000);
+        System.out.println(dayBetween);
+        if(dayBetween<d)    return true;
+        else
         return false;
+    }
+
+    public Map<String, Double> recentPages(String uid, int days){
+        Map<String, Double> map = new HashMap<String, Double>();
+        List<Time> times = timeRepository.findByUserIdAndType(uid, DONE);
+        Iterator it = times.iterator();
+        while(it.hasNext()) {
+            Time time = (Time) it.next();
+            if (!checkDays(time.getBegin().substring(0, 10), days)) continue;
+            if(time.getBegin().substring(0, 10).equals(time.getEnd().substring(0,10))) {
+                double pages = time.getToPage() - time.getFromPage() + 1;
+                if(time.getFromPage() == 0 || time.getToPage() == 0)
+                    pages = bookRepository.findById(time.getBooks()[0]).getTotalPage();
+                map.put(time.getBegin().substring(0, 10), pages);
+            }else{
+                Iterator<String> dates = getDuringDate(time.getBegin(), time.getEnd()).iterator();
+                int n = getDuringDate(time.getBegin(), time.getEnd()).size();
+                while (dates.hasNext()){
+                    String date = dates.next();
+                    map.put(date, (time.getToPage()-time.getToPage())*1.0/n);
+                }
+            }
+        }
+        return sortMap(map);
+    }
+
+    public Map sortMap(Map map){
+        Map<String, Object> newMap = new TreeMap<String, Object>(
+                new Comparator<String>() {
+                    public int compare(String o1, String o2) {
+                        if (DateUtils.stringToDate(o1, DateUtils.patternA).before(DateUtils.stringToDate(o2, DateUtils.patternA)))
+                            return -1;
+                        else return 1;
+                    }
+                }
+
+        );
+        Set<Map.Entry<String, Object>> set = map.entrySet();
+        Iterator<Map.Entry<String, Object>> itMap = set.iterator();
+        while (itMap.hasNext()){
+            Map.Entry<String, Object> next = itMap.next();
+            newMap.put(next.getKey(), next.getValue());
+        }
+
+        return newMap;
     }
 }

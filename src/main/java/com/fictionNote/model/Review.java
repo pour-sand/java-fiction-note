@@ -11,6 +11,7 @@ import org.springframework.data.annotation.Id;
 public class Review {
     String type;
     String content;
+    @Getter
     boolean checked;
     String info;
     String user;

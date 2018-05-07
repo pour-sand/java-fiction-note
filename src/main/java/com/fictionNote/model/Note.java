@@ -15,12 +15,13 @@ public class Note {
 	private String bookId;
 	private String userId;
 	private String title;
-	private String fromPage, toPage;
+	private int fromPage, toPage;
 	private String content;
 	//private String timeb;
 	//private String timee;
 	private String time;
-	private String visible;
+	private boolean visible;
+	private String type; //blurb extraction
 	private List<Review> reviews;
 	private List<String> likes;
 	

@@ -8,7 +8,7 @@ import com.fictionNote.model.Book;
 import com.fictionNote.model.BookList;
 
 public interface BookListRepository extends MongoRepository<BookList, String> {
-	public List<BookList> findByUserId(String userId);
 	public BookList findByBookIdAndUserId(String bid, String uid);
+	public List<BookList> findByUserId(String userId);
 	public BookList findById(String id);
 }
