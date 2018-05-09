@@ -38,6 +38,11 @@ public class NoteController {
 				|| !DateUtils.compareNoteTime(note.getTimee(), note.getTime())){
 			return "Wrong time error";
 		}*/
+		List<Review> r = new ArrayList<Review>();
+		List<String> l = new ArrayList<String>();
+		note.setReviews(r);
+		note.setType("extraction");
+		note.setLikes(l);
 		if(note.getId()!=null && !note.getId().equals(""))
 			noteRepository.delete(noteRepository.findById(note.getId()));
 		//note.setTimeb(DateUtils.formateNoteTime(note.getTimeb()));
@@ -159,24 +164,6 @@ public class NoteController {
 		}
 		return res;
 	}
-
-	/*@RequestMapping(value = "/getReviewNum", method = { RequestMethod.GET})
-	@ResponseBody
-	public String reviewCheck(HttpServletRequest request) {
-		String name = "";
-		if(request.getCookies()[0] != null) name = request.getCookies()[0].getValue();
-		String uid = userRepository.findByUserName(name).getId();
-		List<Note> notes = noteRepository.findByUserId(uid);
-		List<Review> res = new ArrayList<Review>();
-		for(int i=0; i<notes.size(); i++){
-			List<Review> reviews = notes.get(i).getReviews();
-			for(int j=0; j<reviews.size(); j++){
-
-			}
-			res.addAll(reviews);
-		}
-		return "";
-	}*/
 
 	@RequestMapping(value = "/checkMsg", method = { RequestMethod.POST})
 	@ResponseBody

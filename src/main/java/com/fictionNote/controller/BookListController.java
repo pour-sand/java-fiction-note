@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.fictionNote.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -22,6 +23,8 @@ public class BookListController {
 	BookListRepository blRepository;
 	@Autowired
 	BookService bookService;
+	@Autowired
+	UserRepository userRepository;
 	
 	@RequestMapping(value="/addToBookList", method={ RequestMethod.POST})
 	@ResponseBody
@@ -59,11 +62,13 @@ public class BookListController {
 		return "success";
 	}
 	
-	@RequestMapping(value="/getUserBookList", method={ RequestMethod.POST})
+	@RequestMapping(value="/getUserBookList", method={ RequestMethod.GET})
 	@ResponseBody
 	public Result<Object> getBookList(HttpServletRequest request){
-		String u = request.getParameter("userId");
-		List<Book> bookList = bookService.bookList(u);
+		String name = "";
+		if(request.getCookies()[0] != null) name = request.getCookies()[0].getValue();
+		String uid = userRepository.findByUserName(name).getId();
+		List<Book> bookList = bookService.bookList(uid);
 		if(bookList.isEmpty()) return new Result(201, "Your List is empty!");
 		return new Result(200, "", bookList);
 	}

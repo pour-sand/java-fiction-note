@@ -6,7 +6,6 @@ import com.fictionNote.service.TimeService;
 import com.fictionNote.utils.DateUtils;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import javafx.animation.Timeline;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -146,4 +145,14 @@ public class RecordTimeController {
         return gson.toJson(map);
     }
 
+    @RequestMapping(value = "/recentPage", method = { RequestMethod.GET})
+    @ResponseBody
+    public String recentPage(@RequestParam(value="days", required=true) String days, HttpServletRequest request) {
+        String name = "";
+        if(request.getCookies()[0] != null) name = request.getCookies()[0].getValue();
+        String uid = userRepository.findByUserName(name).getId();
+        Map map = timeService.recentPages(uid, Integer.valueOf(days));
+        Gson gson = new GsonBuilder().enableComplexMapKeySerialization().create();
+        return gson.toJson(map);
+    }
 }

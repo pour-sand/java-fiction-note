@@ -9,6 +9,7 @@ import org.springframework.data.annotation.Id;
 @Setter
 @ToString
 public class Review {
+    public Review(){}
     String type;
     String content;
     @Getter

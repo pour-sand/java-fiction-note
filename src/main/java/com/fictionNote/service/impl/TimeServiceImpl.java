@@ -170,7 +170,10 @@ public class TimeServiceImpl implements TimeService {
                 int n = getDuringDate(time.getBegin(), time.getEnd()).size();
                 while (dates.hasNext()){
                     String date = dates.next();
-                    map.put(date, (time.getToPage()-time.getToPage())*1.0/n);
+                    int pages = time.getToPage()-time.getFromPage()+1;
+                    if(time.getFromPage() == 0 || time.getToPage() == 0)
+                        pages = bookRepository.findById(time.getBooks()[0]).getTotalPage();
+                    map.put(date, pages*1.0/n);
                 }
             }
         }
